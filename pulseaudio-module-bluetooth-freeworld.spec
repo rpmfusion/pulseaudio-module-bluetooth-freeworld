@@ -1,7 +1,7 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.1.99
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
@@ -64,6 +64,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-policy.so
 
 %changelog
+* Fri Apr 12 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-2
+- Fix sources file
+
 * Fri Apr 12 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-1
 - 1.1.99 upgrade
 
