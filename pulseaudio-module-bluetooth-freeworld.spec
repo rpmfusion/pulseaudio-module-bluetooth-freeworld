@@ -66,6 +66,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-policy.so
 
 %changelog
+* Sat Jun 29 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-4
+- Add fdk-aac-free as hard dependency (it's not dlopened)
+
 * Sat Jun 29 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-3
 - Add fdk-aac-free BuildRequires
 
