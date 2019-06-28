@@ -1,7 +1,7 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.1.99
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
@@ -37,7 +37,7 @@ Requires:       pulseaudio%{_isa} >= %{pa_version}
 # Optional runtime dependencies respectively for aptX, LDAC Bluetooth codecs
 Recommends:     ffmpeg-libs%{_isa}
 Recommends:     libldac%{_isa}
-Recommends:     fdk-aac-free%{_isa}
+Requires:       fdk-aac-free%{_isa}
 
 %description
 Contains Bluetooth audio (A2DP/HSP/HFP) support for the PulseAudio sound server.
