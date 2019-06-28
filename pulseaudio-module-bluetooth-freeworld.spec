@@ -26,20 +26,22 @@ BuildRequires:  pkgconfig(bluez)
 BuildRequires:  pkgconfig(sbc)
 BuildRequires:  pkgconfig(dbus-1)
 
-# aptX, LDAC
+# aptX, LDAC, AAC
 BuildRequires:  pkgconfig(libavcodec)
 BuildRequires:  pkgconfig(libavutil)
 BuildRequires:  libldac-devel
+BuildRequires:  pkgconfig(fdk-aac)
 
 Requires:       pulseaudio%{_isa} >= %{pa_version}
 
 # Optional runtime dependencies respectively for aptX, LDAC Bluetooth codecs
 Recommends:     ffmpeg-libs%{_isa}
 Recommends:     libldac%{_isa}
+Recommends:     fdk-aac-free%{_isa}
 
 %description
 Contains Bluetooth audio (A2DP/HSP/HFP) support for the PulseAudio sound server.
-Includes support for LDAC, aptX and aptX-HD codecs.
+Includes support for LDAC, aptX, aptX-HD and AAC codecs.
 
 %prep
 # BT source
@@ -64,6 +66,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-policy.so
 
 %changelog
+* Sat Jun 29 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-3
+- Add fdk-aac-free BuildRequires
+
 * Fri Apr 12 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-2
 - Fix sources file
 
