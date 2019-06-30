@@ -5,16 +5,21 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.1.99
-Release:        5%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        6%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
 %global pa_version   12.2
 %global pa_archivename pulseaudio-%{pa_version}
-%global bt_archivename pulseaudio-modules-bt-%{version}
 
-%if 0%{?gitrel}
-Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/%{gitcommit}.tar.gz
+%if 0%{?snap}
+%global bt_archivename pulseaudio-modules-bt-%{gitcommit}
+%else
+%global bt_archivename pulseaudio-modules-bt-%{version}
+%endif
+
+%if 0%{?snap}
+Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/%{gitcommit}/%{bt_archivename}.tar.gz  
 %else
 Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/v%{version}/%{bt_archivename}.tar.gz
 %endif
@@ -74,6 +79,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-policy.so
 
 %changelog
+* Sun Jun 30 2019 Gergely Gombos <gombosg@disroot.org> - 1.1.99-6.20190630git2fde9
+- Correct Source0 field
+
 * Sun Jun 30 2019 Gergely Gombos <gombosg@disroot.org> - 1.1.99-5.20190630git2fde9
 - Compile with fixes from master commit 2fde9b7 until upstream releases
 
