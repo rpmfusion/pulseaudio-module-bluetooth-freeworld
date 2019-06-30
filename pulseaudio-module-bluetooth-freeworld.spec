@@ -1,7 +1,11 @@
+%global snap       20190630
+%global gitcommit  2fde9b79449661afd162f5d6eeeba49f80eba37a
+%global shortcommit %(c=%{gitcommit}; echo ${c:0:5})
+
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.1.99
-Release:        4%{?dist}
+Release:        5%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
@@ -9,7 +13,11 @@ URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 %global pa_archivename pulseaudio-%{pa_version}
 %global bt_archivename pulseaudio-modules-bt-%{version}
 
+%if 0%{?gitrel}
+Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/%{gitcommit}.tar.gz
+%else
 Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/v%{version}/%{bt_archivename}.tar.gz
+%endif
 Source1:        http://freedesktop.org/software/pulseaudio/releases/%{pa_archivename}.tar.xz
 
 Provides:       pulseaudio-module-bluetooth = %{pa_version}-100
@@ -66,6 +74,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-policy.so
 
 %changelog
+* Sun Jun 30 2019 Gergely Gombos <gombosg@disroot.org> - 1.1.99-5.20190630git2fde9
+- Compile with fixes from master commit 2fde9b7 until upstream releases
+
 * Sat Jun 29 2019 Gergely Gombos <gombosg@gmail.com> - 1.1.99-4
 - Add fdk-aac-free as hard dependency (it's not dlopened)
 
