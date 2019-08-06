@@ -1,15 +1,21 @@
-%global snap       20190630
-%global gitcommit  2fde9b79449661afd162f5d6eeeba49f80eba37a
+%global snap       20190806
+%global gitcommit  99aa1fe3d0b90a9ad5682d8cb3092e6e10f6d5cb
 %global shortcommit %(c=%{gitcommit}; echo ${c:0:5})
 
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.1.99
-Release:        6%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        7%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
+%if 0%{?fedora} > 30
+%global pa_major   12.99
+%global pa_version   12.99.1
+%else
+%global pa_major   12.2
 %global pa_version   12.2
+%endif
 %global pa_archivename pulseaudio-%{pa_version}
 
 %if 0%{?snap}
@@ -72,13 +78,16 @@ mv %{pa_archivename} pa
 %make_install
 
 %files
-%{_libdir}/pulse-%{pa_version}/modules/libbluez*-util.so
-%{_libdir}/pulse-%{pa_version}/modules/module-bluez*-device.so
-%{_libdir}/pulse-%{pa_version}/modules/module-bluez*-discover.so
-%{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-discover.so
-%{_libdir}/pulse-%{pa_version}/modules/module-bluetooth-policy.so
+%{_libdir}/pulse-%{pa_major}/modules/libbluez*-util.so
+%{_libdir}/pulse-%{pa_major}/modules/module-bluez*-device.so
+%{_libdir}/pulse-%{pa_major}/modules/module-bluez*-discover.so
+%{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-discover.so
+%{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
 
 %changelog
+* Tue Aug 6 2019 Gergely Gombos <gombosg@disroot.org> - 1.1.99-7.20190806git99aa1f
+- Upgrade to Pulseaudio 12.99.1 for rawhide
+
 * Sun Jun 30 2019 Gergely Gombos <gombosg@disroot.org> - 1.1.99-6.20190630git2fde9
 - Correct Source0 field
 
