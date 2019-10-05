@@ -25,9 +25,9 @@ URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 %endif
 
 %if 0%{?snap}
-Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/%{gitcommit}/%{bt_archivename}.tar.gz  
+Source0:        %{url}/archive/%{gitcommit}/%{bt_archivename}.tar.gz  
 %else
-Source0:        https://github.com/EHfive/pulseaudio-modules-bt/archive/v%{version}/%{bt_archivename}.tar.gz
+Source0:        %{url}/archive/v%{version}/%{bt_archivename}.tar.gz
 %endif
 Source1:        http://freedesktop.org/software/pulseaudio/releases/%{pa_archivename}.tar.xz
 
@@ -36,7 +36,7 @@ Conflicts:      pulseaudio-module-bluetooth < %{pa_version}-100
 
 BuildRequires:  automake libtool
 BuildRequires:  gcc-c++
-BuildRequires:  cmake
+BuildRequires:  cmake3
 BuildRequires:  pkgconfig
 BuildRequires:  libtool-ltdl-devel
 BuildRequires:  pulseaudio >= %{pa_version}
@@ -71,7 +71,7 @@ rm -rf pa
 mv %{pa_archivename} pa
 
 %build
-%cmake .
+%cmake3 .
 %make_build
 
 %install
