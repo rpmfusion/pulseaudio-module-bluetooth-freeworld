@@ -2,6 +2,8 @@
 # % global gitcommit  99aa1fe3d0b90a9ad5682d8cb3092e6e10f6d5cb
 # % global shortcommit % (c=% {gitcommit}; echo ${c:0:5})
 
+%undefine __cmake_in_source_build
+
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.4
@@ -72,11 +74,11 @@ rm -rf pa
 mv %{pa_archivename} pa
 
 %build
-%cmake3 .
-%make_build
+%cmake3
+%cmake3_build
 
 %install
-%make_install
+%cmake3_install
 
 %files
 %{_libdir}/pulse-%{pa_major}/modules/libbluez*-util.so
