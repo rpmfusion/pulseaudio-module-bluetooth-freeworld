@@ -7,17 +7,17 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.4
-Release:        2%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        3%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
-%if 0%{?fedora} <= 30
-%global pa_major   12.2
-%global pa_version   12.2
-%endif
-%if 0%{?fedora} >= 31
+%if 0%{?fedora} >= 31 && 0%{?fedora} <= 32
 %global pa_major   13.99
-%global pa_version   13.99.1
+%global pa_version   13.99.2
+%endif
+%if 0%{?fedora} >= 33
+%global pa_major   13.99
+%global pa_version   13.99.2
 %endif
 %global pa_archivename pulseaudio-%{pa_version}
 
@@ -28,7 +28,7 @@ URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 %endif
 
 %if 0%{?snap}
-Source0:        %{url}/archive/%{gitcommit}/%{bt_archivename}.tar.gz  
+Source0:        %{url}/archive/%{gitcommit}/%{bt_archivename}.tar.gz
 %else
 Source0:        %{url}/archive/v%{version}/%{bt_archivename}.tar.gz
 %endif
@@ -88,6 +88,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
 
 %changelog
+* Thu Oct 08 2020 Gergely Gombos <gombosg@disroot.org> - 1.4-3
+- pulseaudio 13.99.2 for F33+, F30 EOL
+
 * Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
