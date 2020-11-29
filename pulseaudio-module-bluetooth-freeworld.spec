@@ -7,22 +7,14 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.4
-Release:        4%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        5%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
-%if 0%{?fedora} >= 34
+# see https://src.fedoraproject.org/rpms/pulseaudio for versions
 %global pa_major   14.0
 %global pa_version   14.0
-%endif
-%if 0%{?fedora} == 33
-%global pa_major   13.99
-%global pa_version   13.99.2
-%endif
-%if 0%{?fedora} <= 32
-%global pa_major   13.99
-%global pa_version   13.99.1
-%endif
+
 %global pa_archivename pulseaudio-%{pa_version}
 
 %if 0%{?snap}
@@ -92,6 +84,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
 
 %changelog
+* Sun Nov 29 2020 Gergely Gombos <gombosg@disroot.org> - 1.4-5
+- pulseaudio 14.0 for F32-F33-F34
+
 * Tue Nov 24 2020 Gergely Gombos <gombosg@disroot.org> - 1.4-4
 - pulseaudio 14.0 for F34+, F31 EOL, fix F32 version
 
