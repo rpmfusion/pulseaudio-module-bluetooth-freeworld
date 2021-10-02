@@ -12,8 +12,8 @@ License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
 # see https://src.fedoraproject.org/rpms/pulseaudio for versions
-%global pa_major   14.2
-%global pa_version   14.2
+%global pa_major   15.0
+%global pa_version   15.0
 
 %global pa_archivename pulseaudio-%{pa_version}
 
