@@ -2,12 +2,14 @@
 # % global gitcommit  99aa1fe3d0b90a9ad5682d8cb3092e6e10f6d5cb
 # % global shortcommit % (c=% {gitcommit}; echo ${c:0:5})
 
+# disable rpath check
+%global __brp_check_rpaths %{nil}
 %undefine __cmake_in_source_build
 
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.4
-Release:        9%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        10%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
@@ -75,7 +77,7 @@ ls
 %patch0 -p1 -b .ffmpeg5
 
 %build
-%cmake3 -DCMAKE_SKIP_RPATH=ON
+%cmake3
 %cmake3_build
 
 %install
@@ -89,6 +91,9 @@ ls
 %{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
 
 %changelog
+* Mon Feb 07 2022 Gergely Gombos <gombosg@disroot.org> - 1.4-10
+- Disable rpath
+
 * Mon Feb 07 2022 Gergely Gombos <gombosg@disroot.org> - 1.4-9
 - FFMpeg 5 patch, disable rpath
 
