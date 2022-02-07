@@ -7,7 +7,7 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.4
-Release:        8%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        9%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
@@ -29,6 +29,8 @@ Source0:        %{url}/archive/%{gitcommit}/%{bt_archivename}.tar.gz
 Source0:        %{url}/archive/v%{version}/%{bt_archivename}.tar.gz
 %endif
 Source1:        http://freedesktop.org/software/pulseaudio/releases/%{pa_archivename}.tar.xz
+
+Patch0:         ffmpeg5_libavutil.patch
 
 Provides:       pulseaudio-module-bluetooth = %{pa_version}-100
 Conflicts:      pulseaudio-module-bluetooth < %{pa_version}-100
@@ -69,8 +71,11 @@ Includes support for LDAC, aptX, aptX-HD and AAC codecs.
 rm -rf pa
 mv %{pa_archivename} pa
 
+ls
+%patch0 -p1 -b .ffmpeg5
+
 %build
-%cmake3
+%cmake3 -DCMAKE_SKIP_RPATH=ON
 %cmake3_build
 
 %install
@@ -84,6 +89,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
 
 %changelog
+* Mon Feb 07 2022 Gergely Gombos <gombosg@disroot.org> - 1.4-9
+- FFMpeg 5 patch, disable rpath
+
 * Wed Oct 06 2021 Gergely Gombos <gombosg@disroot.org> - 1.4-8
 - Updated to PA 15.0
 
