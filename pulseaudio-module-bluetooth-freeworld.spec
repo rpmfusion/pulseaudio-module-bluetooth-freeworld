@@ -9,7 +9,7 @@
 Name:           pulseaudio-module-bluetooth-freeworld
 Summary:        Bluetooth support for the PulseAudio sound server, supports aptX, LDAC codecs
 Version:        1.4
-Release:        11%{?snap:.%{snap}git%{shortcommit}}%{?dist}
+Release:        12%{?snap:.%{snap}git%{shortcommit}}%{?dist}
 License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
@@ -32,8 +32,7 @@ Source0:        %{url}/archive/v%{version}/%{bt_archivename}.tar.gz
 %endif
 Source1:        http://freedesktop.org/software/pulseaudio/releases/%{pa_archivename}.tar.xz
 
-Patch0:         ffmpeg5_libavutil.patch
-Patch1:         ffmpeg5_libavcodec.patch
+Patch0:         ffmpeg5.patch
 
 Provides:       pulseaudio-module-bluetooth = %{pa_version}-100
 Conflicts:      pulseaudio-module-bluetooth < %{pa_version}-100
@@ -74,8 +73,9 @@ Includes support for LDAC, aptX, aptX-HD and AAC codecs.
 rm -rf pa
 mv %{pa_archivename} pa
 
-%patch0 -p1 -b .ffmpeg5_libavutil
-%patch1 -p1 -b .ffmpeg5_libavcodec
+%if 0%{?fedora} && 0%{?fedora} > 35
+%patch0 -p1 -b .ffmpeg5
+%endif
 
 %build
 %cmake3
@@ -92,6 +92,9 @@ mv %{pa_archivename} pa
 %{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
 
 %changelog
+* Tue Feb 08 2022 Leigh Scott <leigh123linux@gmail.com> - 1.4-12
+- Fix ffmpeg patching
+
 * Tue Feb 08 2022 Gergely Gombos <gombosg@disroot.org> - 1.4-11
 - Patch hardcoded library name
 
