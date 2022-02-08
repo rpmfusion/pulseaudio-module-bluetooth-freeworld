@@ -1,5 +1,5 @@
---- ./src/modules/bluetooth/a2dp/a2dp_aptx.c	2022-02-07 10:26:58.804788966 +0100
-+++ ./src/modules/bluetooth/a2dp/a2dp_aptx.c	2022-02-07 10:27:56.430759427 +0100
+--- ./src/modules/bluetooth/a2dp/a2dp_aptx.c	
++++ ./src/modules/bluetooth/a2dp/a2dp_aptx.c	
 @@ -23,6 +23,7 @@
  
  #include <libavcodec/avcodec.h>
@@ -7,4 +7,3 @@
 +#include <libavutil/channel_layout.h>
  
  #include <pulse/xmalloc.h>
- 

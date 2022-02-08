@@ -1,0 +1,9 @@
+--- ./src/modules/bluetooth/a2dp/ffmpeg_libs.c
++++ ./src/modules/bluetooth/a2dp/ffmpeg_libs.c
+@@ -35,7 +35,6 @@
+ #include "ffmpeg_libs.h"
+
+ static const char *AVCODEC_LIB_NAMES[] = {
+-        "libavcodec.so.58",
+         "libavcodec.so"
+ };
