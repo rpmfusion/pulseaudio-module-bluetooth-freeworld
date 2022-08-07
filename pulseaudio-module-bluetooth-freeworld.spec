@@ -14,8 +14,8 @@ License:        GPLv3
 URL:            https://github.com/EHfive/pulseaudio-modules-bt/
 
 # see https://src.fedoraproject.org/rpms/pulseaudio for versions
-%global pa_major   15.0
-%global pa_version   15.0
+%global pa_major   16.1
+%global pa_version   16.1
 
 %global pa_archivename pulseaudio-%{pa_version}
 
@@ -85,16 +85,17 @@ mv %{pa_archivename} pa
 %cmake3_install
 
 %files
-%{_libdir}/pulse-%{pa_major}/modules/libbluez*-util.so
-%{_libdir}/pulse-%{pa_major}/modules/module-bluez*-device.so
-%{_libdir}/pulse-%{pa_major}/modules/module-bluez*-discover.so
-%{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-discover.so
-%{_libdir}/pulse-%{pa_major}/modules/module-bluetooth-policy.so
+%{_libdir}/pulseaudio/modules/libbluez*-util.so
+%{_libdir}/pulseaudio/modules/module-bluez*-device.so
+%{_libdir}/pulseaudio/modules/module-bluez*-discover.so
+%{_libdir}/pulseaudio/modules/module-bluetooth-discover.so
+%{_libdir}/pulseaudio/modules/module-bluetooth-policy.so
 
 %changelog
 * Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.4-13
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
+- Updated to PA 16.1
 
 * Tue Feb 08 2022 Leigh Scott <leigh123linux@gmail.com> - 1.4-12
 - Fix ffmpeg patching
